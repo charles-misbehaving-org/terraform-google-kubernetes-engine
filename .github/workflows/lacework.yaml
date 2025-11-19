@@ -24,12 +24,12 @@ jobs:
             - name: Scan the repo for vulnerabilities in IaC
               run: |
                   set +e
-                  LW_ACCOUNT: ${{ secrets.LW_ACCOUNT }}
-                  LW_API_KEY: ${{ secrets.LW_API_KEY }}
-                  LW_API_SECRET: ${{ secrets.LW_API_SECRET }}
+                  echo "LW_ACCOUNT: ${{ secrets.LW_ACCOUNT }}" >> env.list
+                  echo "LW_API_KEY: ${{ secrets.LW_API_KEY }}" >> env.list
+                  echo "LW_API_SECRET: ${{ secrets.LW_API_SECRET }}" env.list
                   echo "CI_GIT_REPO_URL=$GITHUB_REPOSITORY" >> env.list
                   echo "CI_REPO_URL=$GITHUB_REPOSITORY" >> env.list
-                  env | grep "GITHUB_\|LW_\|CI_" > env.list
+                  env | grep "GITHUB_\|LW_\|CI_" >> env.list
                   cat env.list
                   docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=.
                   SCAN_EXIT_STATUS=$?
