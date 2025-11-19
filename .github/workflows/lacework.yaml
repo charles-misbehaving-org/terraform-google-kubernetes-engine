@@ -33,6 +33,8 @@ jobs:
             - name: Scan the repo for vulnerabilities in IaC
               run: |
                   set +e
+                  env | grep "GITHUB_\|LW_\|CI_" > env.list
+                  cat env.list
                   docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=.
                   SCAN_EXIT_STATUS=$?
                   echo "SCAN_EXIT_STATUS=$SCAN_EXIT_STATUS" >> "$GITHUB_ENV"
