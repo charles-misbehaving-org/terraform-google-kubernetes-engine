@@ -27,13 +27,7 @@ jobs:
                   echo "LW_ACCOUNT=${{ secrets.LW_ACCOUNT }}" >> env.list
                   echo "LW_API_KEY=${{ secrets.LW_API_KEY }}" >> env.list
                   echo "LW_API_SECRET=${{ secrets.LW_API_SECRET }}" >> env.list
-                  CI_PIPELINE_URL = the url of the pipeline homepage
-                  CI_BUILD_ID = build id of the pipeline build being run
-                  echo "CI_PLATFORM=GITHUB" >> env.list
-                  echo "CI_PIPELINE_NAME=Lacework IAC" >> env.list
-                  echo "CI_PIPELINE_URL=$GITHUB_REPOSITORY" >> env.list
-                  echo "CI_BUILD_ID=$GITHUB_RUN_ID" >> env.list
-                  env | grep "GITHUB_\|LW_\|CI_" >> env.list
+                  env | grep "GITHUB_\|LW_\|CI_\|CODE_" >> env.list
                   cat env.list
                   docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=.
                   SCAN_EXIT_STATUS=$?
