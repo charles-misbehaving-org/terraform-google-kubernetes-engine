@@ -28,6 +28,7 @@ jobs:
                   echo "LW_ACCOUNT=${{ secrets.LW_ACCOUNT }}" >> env.list
                   echo "LW_API_KEY=${{ secrets.LW_API_KEY }}" >> env.list
                   echo "LW_API_SECRET=${{ secrets.LW_API_SECRET }}" >> env.list
+                  cat env.list
 
             - name: Scan the repo for vulnerabilities in IaC
               run: |
