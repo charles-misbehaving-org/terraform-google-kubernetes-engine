@@ -34,3 +34,6 @@ jobs:
                   SCAN_EXIT_STATUS=$?
                   echo "SCAN_EXIT_STATUS=$SCAN_EXIT_STATUS" >> "$GITHUB_ENV"
                   set -e
+            - name: Scan Status
+              run: |
+                exit $(($SCAN_EXIT_STATUS))
