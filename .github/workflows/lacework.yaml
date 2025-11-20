@@ -29,7 +29,7 @@ jobs:
                   echo "LW_API_SECRET=${{ secrets.LW_API_SECRET }}" >> env.list
                   env | grep "GITHUB_\|LW_\|CI_\|CODE_" >> env.list
                   cat env.list
-                  docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=.
+                  docker run --env-file env.list -v "$(pwd):/app/src" lacework/codesec:stable lacework iac scan --directory=/app/src
                   SCAN_EXIT_STATUS=$?
                   echo "SCAN_EXIT_STATUS=$SCAN_EXIT_STATUS" >> "$GITHUB_ENV"
                   set -e
